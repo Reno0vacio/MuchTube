@@ -1,16 +1,19 @@
 {
     "name": "MuchTube",
     "version": "1.0",
+    "manifest_version": 3,
     "permissions": ["storage", "tabs"],
-    "manifest_version": 2,
-    "description": "A youtube extension that ask's you why you watching the video",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "matches": ["https://*.youtube.com/*"],
+        "js": ["contentScript.js"]
+    }],
+    "host_permissions": ["https://*.youtube.com/*"],
+    "description": "A youtube extension that asks you why you watching the video",
     "action": {
         "default_icon": "icon.png",
         "default_popup": "index.html"
-    },
-    "content-scripts": [ 
-    {
-        "matches": ["https://*.youtube.com/*"]
     }
-    ]
 }
