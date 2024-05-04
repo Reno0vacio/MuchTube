@@ -21,8 +21,19 @@ function timeOut(second) {
         input.addEventListener("keydown", (event) => {
             if (event.key === "Enter" && input.value != "") {
                 div.remove();
+                let videoObj = {
+                    title: videoTitle,
+                    thumbnail: thumbnailUrl
+                }
+                chrome.storage.local.set({test: videoObj});
+                console.log(chrome.storage.local.get(["test"]));
             }
         })
+
+        // Actual video thumbnail
+        const thumbnailUrl = document.querySelector('#watch7-content.watch-main-col link[itemprop="thumbnailUrl"]').getAttribute('href');
+        const videoTitle = document.querySelector('#title > h1 > yt-formatted-string').innerText;
+
     }, second);
 }
 timeOut(2000);
@@ -31,4 +42,3 @@ timeOut(2000);
 //What i learned: 
 // css styles: backdrop-filter, .
 // timeout.
-
