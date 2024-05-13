@@ -1,9 +1,16 @@
 function timeOut(second) {
     setTimeout(() => {
         const mainVideo = document.getElementsByClassName("style-scope ytd-player")[0].parentElement;
-        const videoSize = document.getElementsByClassName("video-stream html5-main-video")[0].getAttribute("style").split(";");
-        const videoWidth = videoSize[0];
-        const videoHeight = videoSize[1];
+        const videoSize = document.querySelector("#movie_player");
+        const videoWidth = videoSize.offsetWidth;
+        const videoHeight = videoSize.offsetHeight;
+        const pauseVideoClass = document.querySelector(".style-scope .ytd-player").firstElementChild.getAttribute("class");
+        if(pauseVideoClass.includes("playing-mode")) {
+            const pause = pauseVideoClass.replace("playing-mode", "paused-mode")
+            document.querySelector(".style-scope .ytd-player").firstElementChild.setAttribute("class", pause)
+            console.log(pause);
+        }
+        
 
         const div = document.createElement("div");
         const question = document.createElement("h1");
@@ -14,7 +21,7 @@ function timeOut(second) {
         input.setAttribute("placeholder", "because of...");
         input.setAttribute("style", "width: 250px; height: 27px; resize: none; border: 1px solid black; border-radius:12px; background-color: rgba(0, 0, 0, 0.7); color: #f3f3f3e0");
         question.setAttribute("style", "color: #f3f3f3e0; font-size: 3rem; margin-bottom: 5px;")
-        div.setAttribute("style", "display: flex; justify-content: center; flex-direction: column; align-items: center; position: absolute; background: rgba(0,0,0, 0.7); backdrop-filter: blur(10px); border-radius: 12px; " + videoHeight + "; " + videoWidth + "; " + "top: 0px;")
+        div.setAttribute("style", "display: flex; justify-content: center; flex-direction: column; align-items: center; position: absolute; background: rgba(0,0,0, 0.7); backdrop-filter: blur(10px); border-radius: 12px; " + "height:" + videoHeight + "px; " + "width:" + videoWidth + "px; " + "top: 0px;")
         question.appendChild(questionText);
         div.append(question, br, input);
         mainVideo.append(div)
